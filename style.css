@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: black;
+  overflow: hidden;
+}
+#screen {
+  height: 600px;
+  width: 1000px;
+  background-color: white;
+}
+
+#sky {
+  height: 150px;
+  background-color: azure;
+  position: relative;
+}
+#water {
+  height: 450px;
+  background-color: lightblue;
+  position: relative;
+}
+
+#ship {
+  position: absolute;
+  bottom: 0;
+  height: 30px;
+  background-color: brown;
+}
+
+#submarine {
+  position: absolute;
+  bottom: 50px;
+  height: 30px;
+  background-color: crimson;
+}
+
+.torpedo {
+  position: absolute;
+  height: 30px;
+  /* water height - torpedo height */
+  bottom: calc(450px - 30px);
+  background-color: red;
+  transform: translateX(-50%);
+  animation: move 10s linear;
+}
+
+@keyframes move {
+  100% {
+    bottom: 0;
+  }
+}
