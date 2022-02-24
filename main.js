@@ -65,7 +65,7 @@ setInterval(() => {
       submarineX = submarineX + submarineSpeed;
     }
   } else {
-    if (submarineX === 0) {
+    if (submarineX <= 0) {
       travelLeft = true;
       return;
     } else {
@@ -76,11 +76,17 @@ setInterval(() => {
 }, 20);
 // Checking for hit
 setInterval(() => {
-  const torpedosPos = document.querySelector(".torpedo");
-  console.log("========");
-  console.log(torpedosPos.getBoundingClientRect().top);
-  console.log(
-    submarine.getBoundingClientRect().left,
-    submarine.getBoundingClientRect().left + entityWidth
-  );
-}, 1000);
+  const torpedoPos = document.querySelector(".torpedo");
+  const tb = torpedoPos.getBoundingClientRect().bottom;
+
+  // bottom of submarine - height of submarine
+  if (tb >= 530) {
+    const sl = submarine.getBoundingClientRect().left;
+    const sr = submarine.getBoundingClientRect().right;
+    const tl = torpedoPos.getBoundingClientRect().left;
+    const tr = torpedoPos.getBoundingClientRect().right;
+    if (tl >= sl && tr <= sr) {
+      alert("hit?");
+    }
+  }
+}, 10);
