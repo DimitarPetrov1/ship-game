@@ -15,27 +15,31 @@ body {
 
 #sky {
   height: 150px;
-  background-color: azure;
   position: relative;
+  background: url(./img/sky.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 #water {
   height: 450px;
-  background-color: lightblue;
   position: relative;
+  background: url(./img/water.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 #ship {
   position: absolute;
   bottom: 0;
-  height: 30px;
-  background-color: brown;
+  /* background-color: brown; */
+  object-fit: contain;
 }
 
 #submarine {
   position: absolute;
   bottom: 50px;
-  height: 20px;
-  background-color: crimson;
+  /* height: 20px; */
+  object-fit: contain;
 }
 
 .torpedo {
@@ -43,9 +47,9 @@ body {
   height: 30px;
   /* water height - torpedo height */
   bottom: calc(450px - 30px);
-  background-color: red;
   transform: translateX(-50%);
   animation: move 10s linear;
+  object-fit: contain;
 }
 
 @keyframes move {

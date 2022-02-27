@@ -16,7 +16,8 @@ submarine.style.width = entityWidth + "px";
 submarine.style.left = submarineX + "px";
 
 // Ship Torpedo
-const shipTorpedo = document.createElement("div");
+const shipTorpedo = document.createElement("img");
+shipTorpedo.src = "./img/torpedo-ship.png";
 const shipTorpedoWidth = 10;
 shipTorpedo.classList.add("torpedo");
 shipTorpedo.style.width = shipTorpedoWidth + "px";
@@ -35,20 +36,16 @@ const moveShip = (e) => {
   }, 100);
 };
 
-let activeToppedos = [];
 let canFire = true;
 
 const shoot = (e) => {
   if (canFire == true) {
-    canFire = false;
     if (e.keyCode == 32) {
       water.appendChild(shipTorpedo);
       shipTorpedo.style.left = shipX + entityWidth / 2 + "px";
     }
+    canFire = false;
   }
-  setTimeout(() => {
-    canFire = true;
-  }, 5000);
 };
 
 document.addEventListener("keydown", moveShip);
@@ -74,10 +71,14 @@ setInterval(() => {
   }
   submarine.style.left = submarineX + "px";
 }, 20);
-// Checking for hit
+// Checking for submarine hit
 setInterval(() => {
   const torpedoPos = document.querySelector(".torpedo");
-  const tb = torpedoPos.getBoundingClientRect().bottom;
+  let tb = "";
+
+  if (torpedoPos) {
+    tb = torpedoPos.getBoundingClientRect().bottom;
+  }
 
   // bottom of submarine - height of submarine
   if (tb >= 530) {
@@ -86,7 +87,13 @@ setInterval(() => {
     const tl = torpedoPos.getBoundingClientRect().left;
     const tr = torpedoPos.getBoundingClientRect().right;
     if (tl >= sl && tr <= sr) {
-      alert("hit?");
+      console.log("hit?");
+      water.removeChild(shipTorpedo);
+      canFire = true;
     }
+  }
+  if (tb > 550) {
+    water.removeChild(shipTorpedo);
+    canFire = true;
   }
 }, 10);
